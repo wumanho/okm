@@ -2,9 +2,14 @@ import Vue from 'vue'
 import router from "@/./router"
 import axios from "axios";
 import App from './App.vue'
-import env from "@/env.js"
+//import env from "@/env.js"
 
-axios.defaults.baseURL = env.baseURL
+const mock = false
+if (mock) {
+    require("@/mock/api")
+}
+//axios.defaults.baseURL = env.baseURL
+axios.defaults.baseURL = "/api"
 axios.defaults.timeout = 8000
 
 /**

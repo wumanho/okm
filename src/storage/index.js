@@ -1,5 +1,7 @@
 const STORAGE_KEY = "mall";
-
+/**
+ * 封装对于sessionStorage的增删改查操作
+ */
 export default {
     setItem(key, value, moduleName) {
         if (moduleName) {
