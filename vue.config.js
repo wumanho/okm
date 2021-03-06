@@ -12,5 +12,18 @@ module.exports = {
         // .tap(options => ({...options,plugins:[{removeAttrs:{attrs:"fill"}}]})).end()
     config.plugin("svg-sprite").use(require("svg-sprite-loader/plugin"),[{plainSprite:true}])
     config.module.rule("svg").exclude.add(dir)
+  },
+  devServer:{
+    host:"localhost",
+    port:8080,
+    proxy:{
+      "/api":{
+        target:"http://mall-pre.springboot.cn",
+        changeOrigin:true,
+        pathRewrite:{
+          "/api":""
+        }
+      }
+    }
   }
 }
