@@ -32,6 +32,7 @@ export default {
       span{
         width:20px;
         height:20px;
+        margin-right: 4px;
       }
     }
   }

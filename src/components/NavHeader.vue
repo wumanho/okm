@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="nav-topbar">
+    <nav class="nav-topbar">
       <div class="container">
         <div class="topbar-menu">
           <a href="javascript:">小米商城</a>
@@ -20,8 +20,8 @@
           </a>
         </div>
       </div>
-    </div>
-    <div class="nav-header">
+    </nav>
+    <header class="nav-header">
       <div class="container">
         <div class="header-logo">
           <a href=""></a>
@@ -131,7 +131,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </header>
   </div>
 </template>
 
@@ -180,7 +180,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import "~@/assets/scss/base.scss";
 @import "~@/assets/scss/mixin.scss";
 @import "~@/assets/scss/config.scss";
 
@@ -199,6 +198,7 @@ export default {
 
       .cart {
         width: 110px;
+        margin-right: 0;
         background: #FF6600;
         text-align: center;
         color: #ffffff;
@@ -232,13 +232,13 @@ export default {
 
           &:before {
             content: '';
-            @include bgImg(55px, 55px, "/imgs/mi-home.png");
+            @include bgImg(55px, 55px, "/imgs/mi-logo.png");
             transition: margin-left 0.5s;
           }
 
           &:after {
             content: '';
-            @include bgImg(55px, 55px, "/imgs/mi-logo.png");
+            @include bgImg(55px, 55px, "/imgs/mi-home.png");
           }
 
           &:hover:before {
@@ -273,6 +273,7 @@ export default {
 
           .children {
             position: absolute;
+            background-color: #ffffff;
             left: 0;
             top: 112px;
             width: 1226px;
