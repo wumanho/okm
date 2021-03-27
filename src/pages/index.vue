@@ -82,7 +82,7 @@
                   <p>{{ item.subtitle }}元</p>
                   <p class="price">
                     {{ item.price }}
-                    <MyIcon class="cart" name="#cart"/>
+                    <MyIcon class="cart" name="#cart" @click.native="addCart(item.id)" />
                   </p>
                 </div>
               </div>
@@ -92,7 +92,12 @@
       </div>
     </div>
     <service-bar/>
-    <modal title="提示" confirm-text="查看购物车" btn-type="1" modal-type="middle" :show-modal="true">
+    <modal title="提示"
+           confirm-text="查看购物车"
+           btn-type="2"
+           modal-type="middle"
+           :show-modal.sync=showModal
+           @submit="goToCart">
         <template v-slot:body>
           <p>商品添加成功</p>
         </template>
@@ -192,7 +197,8 @@ export default {
           img:'/imgs/ads/ads-4.jpg'
         }
       ],
-      phoneList:[]
+      phoneList:[],
+      showModal:false
     }
   },
   mounted() {
@@ -210,6 +216,20 @@ export default {
         res.list = res.list.slice(6,14)
         this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)]
       })
+    },
+    addCart(){
+      this.showModal = true
+      // this.axios.post("/carts",{
+      //   productId:id,
+      //   selected:true
+      // }).then(()=>{
+      //
+      // }).catch(()=>{
+      //   this.showModal = true
+      // })
+    },
+    goToCart(){
+      this.$router.push("/cart")
     }
   }
 }
