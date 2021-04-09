@@ -16,7 +16,7 @@
             <span class="icon-cart">
               <MyIcon name="#cart"/>
             </span>
-            购物车
+            购物车({{cartCount}})
           </a>
         </div>
       </div>
@@ -137,7 +137,7 @@
 
 <script lang="js">
 import MyIcon from "@/components/MyIcon";
-
+import {mapState} from 'vuex'
 export default {
   name: "nav-header",
   components: {MyIcon},
@@ -148,11 +148,17 @@ export default {
         item.price = "￥" + item.price.toFixed(2) + "元"
         return item
       })
-    }
+    },
+    ...mapState(["username","cartCount"])
+    // username(){
+    //   return this.$store.state.username
+    // },
+    // cartCount(){
+    //   return this.$store.state.cartCount
+    // }
   },
   data() {
     return {
-      username: "wumanho",
       phoneList: []
     }
   },

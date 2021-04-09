@@ -67,7 +67,7 @@
         <div class="wrapper">
           <div class="banner-left">
             <a href="/#/product/35">
-              <img src="/imgs/mix-alpha.jpg" alt="">
+              <img v-lazy="'/imgs/mix-alpha.jpg'" alt="">
             </a>
           </div>
           <div class="list-box">
