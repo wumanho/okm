@@ -78,11 +78,11 @@
                   <img :src="item.mainImage" alt="">
                 </div>
                 <div class="item-info">
-                  <h3>{{item.name}}</h3>
+                  <h3>{{ item.name }}</h3>
                   <p>{{ item.subtitle }}元</p>
                   <p class="price">
                     {{ item.price }}
-                    <MyIcon class="cart" name="#cart" @click.native="addCart(item.id)" />
+                    <MyIcon class="cart" name="#cart" @click.native="addCart(item.id)"/>
                   </p>
                 </div>
               </div>
@@ -98,9 +98,9 @@
            modal-type="middle"
            :show-modal.sync=showModal
            @submit="goToCart">
-        <template v-slot:body>
-          <p>商品添加成功</p>
-        </template>
+      <template v-slot:body>
+        <p>商品添加成功</p>
+      </template>
     </modal>
   </div>
 </template>
@@ -114,7 +114,7 @@ import Modal from "@/components/Modal";
 
 export default {
   name: 'index',
-  components: {MyIcon, ServiceBar, swiper, swiperSlide,Modal},
+  components: {MyIcon, ServiceBar, swiper, swiperSlide, Modal},
   data() {
     return {
       swiperOption: {
@@ -179,56 +179,56 @@ export default {
           }
         ], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]
       ],
-      adsList:[
+      adsList: [
         {
-          id:33,
-          img:'/imgs/ads/ads-1.png'
+          id: 33,
+          img: '/imgs/ads/ads-1.png'
         },
         {
-          id:48,
-          img:'/imgs/ads/ads-2.jpg'
+          id: 48,
+          img: '/imgs/ads/ads-2.jpg'
         },
         {
-          id:45,
-          img:'/imgs/ads/ads-3.png'
+          id: 45,
+          img: '/imgs/ads/ads-3.png'
         },
         {
-          id:47,
-          img:'/imgs/ads/ads-4.jpg'
+          id: 47,
+          img: '/imgs/ads/ads-4.jpg'
         }
       ],
-      phoneList:[],
-      showModal:false
+      phoneList: [],
+      showModal: false
     }
   },
   mounted() {
     this.init()
   },
-  methods:{
-    init(){
-      this.axios.get('/products',{
-        params:{
-          categoryId:100012,
-          pageSize:14
+  methods: {
+    init() {
+      this.axios.get('/products', {
+        params: {
+          categoryId: 100012,
+          pageSize: 14
         }
-      }).then((res)=>{
+      }).then((res) => {
         console.log(res)
-        res.list = res.list.slice(6,14)
-        this.phoneList = [res.list.slice(0,4),res.list.slice(4,8)]
+        res.list = res.list.slice(6, 14)
+        this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
       })
     },
-    addCart(){
-      this.showModal = true
-      // this.axios.post("/carts",{
-      //   productId:id,
-      //   selected:true
-      // }).then(()=>{
-      //
-      // }).catch(()=>{
-      //   this.showModal = true
-      // })
+    addCart(id) {
+      this.axios.post("/carts", {
+        productId: id,
+        selected: true
+      }).then((res) => {
+        this.showModal = true
+        this.$store.dispatch("saveCartCount", res.cartTotalQuantity)
+      }).catch(() => {
+        this.showModal = true
+      })
     },
-    goToCart(){
+    goToCart() {
       this.$router.push("/cart")
     }
   }
@@ -238,6 +238,7 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/scss/mixin.scss";
 @import "~@/assets/scss/config.scss";
+
 .index {
   .swiper-wrapper {
     height: 451px;
@@ -255,6 +256,7 @@ export default {
         .menu-item {
           height: 50px;
           line-height: 50px;
+
           a {
             display: block;
             position: relative;
@@ -280,7 +282,8 @@ export default {
 
           &:hover {
             background-color: #FF6600;
-            .children{
+
+            .children {
               display: block;
             }
           }
@@ -306,11 +309,13 @@ export default {
                 flex: 1;
                 padding-left: 23px;
               }
-              a{
+
+              a {
                 color: #333333;
                 font-size: 14px;
               }
-              img{
+
+              img {
                 width: 42px;
                 height: 35px;
                 vertical-align: middle;
@@ -339,80 +344,102 @@ export default {
       }
     }
   }
-  .ads-wrapper{
+
+  .ads-wrapper {
     @include flex();
     margin-top: 14px;
     margin-bottom: 31px;
-    a{
+
+    a {
       width: 296px;
       height: 167px;
     }
   }
-  .banner{
+
+  .banner {
     margin-bottom: 50px;
   }
-  .product-box{
+
+  .product-box {
     background-color: $colorJ;
     padding: 30px 0 50px;
-    h2{
+
+    h2 {
       font-size: $fontF;
       height: 21px;
       line-height: 21px;
-      color:$colorB;
+      color: $colorB;
       margin-bottom: 20px;
     }
-    .wrapper{
+
+    .wrapper {
       display: flex;
-      .banner-left{
+
+      .banner-left {
         margin-right: 16px;
-        img{
+
+        img {
           width: 224px;
           height: 619px;
         }
       }
-      .list-box{
-        .list{
+
+      .list-box {
+        .list {
           @include flex();
-          width:986px;
+          width: 986px;
           margin-bottom: 14px;
-          .item{
+
+          .item {
             width: 236px;
             height: 302px;
             background-color: $colorG;
             text-align: center;
-            span{
+
+            span {
               display: inline-block;
               color: $colorG;
               width: 67px;
               height: 24px;
               line-height: 24px;
               font-size: 14px;
-              &.new-pro{background-color: #7ECF68;}
-              &.kill-pro{background-color: #E82626;}
+
+              &.new-pro {
+                background-color: #7ECF68;
+              }
+
+              &.kill-pro {
+                background-color: #E82626;
+              }
             }
-            .item-img{
-              img{
+
+            .item-img {
+              img {
                 height: 195px;
                 width: 100%;
               }
             }
-            .item-info{
-              h3{
+
+            .item-info {
+              h3 {
                 font-size: $fontJ;
                 color: $colorB;
                 line-height: 14px;
                 font-weight: bold;
               }
-              p{
-                color:$colorD;
+
+              p {
+                color: $colorD;
                 line-height: 13px;
-                margin:6px auto 13px;
+                margin: 6px auto 13px;
               }
-              .price{
+
+              .price {
                 color: #F20A0A;
                 font-size: $fontJ;
                 font-weight: bold;
-                .cart{
+
+                .cart {
                   cursor: pointer;
                   margin-left: 5px;
                 }

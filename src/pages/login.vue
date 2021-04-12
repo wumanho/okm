@@ -36,7 +36,7 @@
 </template>
 <script>
 import {mapActions} from 'vuex'
-
+import {Message} from 'element-ui'
 export default {
   name: "login",
   data() {
@@ -54,10 +54,15 @@ export default {
         username: username,
         password: password
       }).then((res) => {
-        this.$cookie.set("userId", res.id, {expires: "1M"})
+        this.$cookie.set("userId", res.id, {expires: "Session"})
         // this.$store.dispatch("saveUsername", res.username)
         this.saveUsername(res.username)
-        this.$router.push("/index")
+        this.$router.push({
+          name:"index",
+          params:{
+            from:"login"
+          }
+        })
       })
     },
     register() {
@@ -66,7 +71,7 @@ export default {
         password: "wumanho",
         email: "wumanho@tutanota.com"
       }).then(() => {
-        alert("注册成功")
+        Message.success("注册成功")
       })
     }
   }

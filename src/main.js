@@ -5,6 +5,8 @@ import App from './App.vue'
 import VueLazyload from "vue-lazyload";
 import VueCookie from "vue-cookie"
 import store from "./store"
+import {Button, Message} from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css'
 //import env from "@/env.js"
 
 const mock = false
@@ -27,8 +29,10 @@ axios.interceptors.response.use(function (response) {
         if (path !== "#/index") {
             window.location.href = "/#/login"
         }
+        return Promise.reject(res.msg)
     } else {
-        alert(res.msg)
+        // alert(res.msg)
+        Message.warning(res.msg)
         return Promise.reject(res.msg)
     }
 })
@@ -39,9 +43,10 @@ Vue.use(VueLazyload, {
     attempt: 1
 })
 Vue.use(VueCookie)
+// Vue.use(Message)
 Vue.config.productionTip = false
 Vue.prototype.axios = axios
-
+Vue.prototype.$message = Message
 new Vue({
     router,
     store,
