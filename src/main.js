@@ -5,7 +5,7 @@ import App from './App.vue'
 import VueLazyload from "vue-lazyload";
 import VueCookie from "vue-cookie"
 import store from "./store"
-import {Button, Message} from 'element-ui'
+import {Message} from 'element-ui'
 // import 'element-ui/lib/theme-chalk/index.css'
 //import env from "@/env.js"
 
@@ -35,6 +35,10 @@ axios.interceptors.response.use(function (response) {
         Message.warning(res.msg)
         return Promise.reject(res.msg)
     }
+},(err)=>{
+    let res = err.response
+    Message.error(res.data.message)
+    return Promise.reject(res.data.message)
 })
 
 Vue.use(VueLazyload, {

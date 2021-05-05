@@ -16,7 +16,7 @@
         <button class="btn" v-if="btnType === '1'" @click="$emit('submit')">{{ confirmText }}</button>
         <div class="btn-group" v-if="btnType === '2'">
           <button class="btn" @click="$emit('submit')">{{ confirmText }}</button>
-          <button class="btn btn-default" @click="$emit('update:show-modal',showModal = false)">取消</button>
+          <button class="btn btn-default" @click="$emit('update:show-modal',showModal = false)">{{ cancelText }}</button>
         </div>
       </div>
     </div>
